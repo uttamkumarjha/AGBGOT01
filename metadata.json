@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Motogp Helmet Ranchi E-Commerce",
+  "description": "A secure, premium e-commerce platform for Motogp Helmet Ranchi (AGV GOD), featuring authenticity verification, high-tech safety scanning, and a hardened user experience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

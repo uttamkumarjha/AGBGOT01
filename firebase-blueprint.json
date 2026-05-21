@@ -1,0 +1,158 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A motorcycle or riding gear product in the store",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "type": { "type": "string" },
+        "model": { "type": "string" },
+        "description": { "type": "string" },
+        "stock": { "type": "number" },
+        "features": { "type": "array", "items": { "type": "string" } },
+        "rating": { "type": "number" },
+        "reviews": { "type": "number" },
+        "image": { "type": "string" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "videoUrl": { "type": "string" },
+        "pdfUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "id": { "type": "string" }
+      },
+      "required": ["name", "price", "type", "image"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer order",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Processing", "Shipped", "Delivered", "Cancelled"] },
+        "shippingInfo": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "phone": { "type": "string" },
+            "address": { "type": "string" },
+            "city": { "type": "string" },
+            "pincode": { "type": "string" },
+            "whatsappUpdates": { "type": "boolean" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "paymentMethod": { "type": "string" }
+      },
+      "required": ["userId", "items", "totalAmount", "status", "shippingInfo", "createdAt", "paymentMethod"]
+    },
+    "SiteSettings": {
+      "title": "Site Settings",
+      "description": "Global configuration for the website",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "heroTitle": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "heroImage": { "type": "string" },
+        "accentColor": { "type": "string" },
+        "contactEmail": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "address": { "type": "string" },
+        "footerText": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Category": {
+      "title": "Category",
+      "description": "A product category or group",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "slug": { "type": "string" },
+        "order": { "type": "number" },
+        "image": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "slug"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "A customer review for a product",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "image": { "type": "string" },
+        "isAdminReview": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["productId", "userName", "rating", "comment", "createdAt"]
+    },
+    "HomepageGallery": {
+      "title": "Homepage Gallery",
+      "description": "Images shown in the technical/safety section on the homepage",
+      "type": "object",
+      "properties": {
+        "wideImage": { "type": "string" },
+        "squareImage1": { "type": "string" },
+        "squareImage2": { "type": "string" },
+        "technicalImage": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "BlockedUser": {
+      "title": "Blocked User",
+      "description": "A user permanently banned for security violations",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "reason": { "type": "string" },
+        "blockedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "reason", "blockedAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Collection of helmets available in the store"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Collection of customer orders"
+    },
+    "/settings/{settingId}": {
+      "schema": "SiteSettings",
+      "description": "Global configuration settings"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Product categories"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Product reviews"
+    },
+    "/blocked_users/{uid}": {
+      "schema": "BlockedUser",
+      "description": "Permanently banned users"
+    },
+    "/security_incidents/{uid}": {
+      "schema": "BlockedUser",
+      "description": "Automatic lock trigger records"
+    },
+    "/site_config/homepage_gallery": {
+      "schema": "HomepageGallery",
+      "description": "Specific images for the homepage aesthetic sections"
+    }
+  }
+}
